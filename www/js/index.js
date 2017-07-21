@@ -336,6 +336,34 @@ $(document).ready(function() {
 
 
 
+	$('#cobrar').click(function() {
+
+		$.ajax({
+			url: "https://pagalofacil.com/services/ServicioCobro.php",
+			type: "POST",
+			data: {accion: "checkStatus",usuario:sessionStorage.getItem("id_cliente") },
+			dataType: 'json',
+			success: function(data){
+				//console.log(data);
+				
+				if(!data.success)
+				{
+					Materialize.toast(data.message, 4000);
+					
+				}
+				else
+				{
+					window.location.href="form-cobro.html";
+				}
+				
+			}
+		});
+
+
+	});
+
+
+
 });
 
 
@@ -368,7 +396,7 @@ function iniciarSistema(){
 
 		$(".link-login").hide();
 
-		$(".link-tarjetas").show();
+		//$(".link-tarjetas").show();
 
 		$(".link-reclamo").show();
 
@@ -392,7 +420,7 @@ function iniciarSistema(){
 
 		$(".link-login").show();
 
-		$(".link-tarjetas").hide();
+		//$(".link-tarjetas").hide();
 
 		$(".link-reclamo").hide();
 

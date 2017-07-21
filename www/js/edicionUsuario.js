@@ -53,6 +53,9 @@ function cargarDatosUsuario(){
           $('#'+key).val(val).focusin();
         });
 
+        $("#ci_titular").val(data.cedula);
+        $('#prefijo_id').val(data.prefijo_id);
+
         if(data.is_juridico=="1")
         {
             $('#apellido').parent().addClass('hide');
@@ -108,7 +111,7 @@ $('#btnSubmitUser').on('click', function(e) {
   //if(telefono == "" || correo == "" || password == "" || password_confirm == "")
   //{
   $.each($('input,select').not('[disabled]'),function (key,val) {
-    if($(val).attr('id')!=undefined&&$(val).attr('id')!=""){
+    if($(val).attr('id')!=undefined&&$(val).attr('id')!="" /*&& $(val).attr('id') != 'contrasena' && $(val).attr('id') != 'contrasena_confirm'*/){
       if($(val).val()==""){
           datosIncompletos = true;
           //Materialize.toast('Debe llenar los campos solicitados', 4000);
@@ -148,7 +151,7 @@ $('#btnSubmitUser').on('click', function(e) {
       url: "https://pagalofacil.com/services/ServicioUsuario.php",
       type: "POST",
       data: {
-        accion: "actualizarPerfil", datos_perfil:datos_perfil/*telefono: telefono, direccion: direccion,
+        accion: "actualizarPerfil", datos_perfil:datos_perfil, ci:$("#ci_titular").val(), id_cliente:sessionStorage.getItem("id_cliente") /*telefono: telefono, direccion: direccion,
         correo: correo, contrasena: password, id_cliente:sessionStorage.getItem("id_cliente")*/
       },
       dataType: 'json',

@@ -310,7 +310,7 @@ function iniciarSistema(){
 	iniciarventana();
 	var valid=sessionStorage.getItem("d_s");
 
-	if(valid){
+	if(valid  == "true"){
 		console.log("sesion iniciada");
 		cargaTarjetas();
 		//link-login
@@ -318,12 +318,15 @@ function iniciarSistema(){
 		$("#banner-registro").hide();
 		$(".link-registro").hide();
 		$(".link-login").hide();
+		//$(".link-tarjetas").show();
+		$(".link-reclamo").show();
 		$(".link-perfil").show();
 		$(".link-logout").show();
 		$('#selectTDC').show();
 		$('#acordeon').css('display', '');
 		$('#seccion-img-user').css('display', 'none');
 		$('#tipo').css('display', '');
+
 	}
 	else{
 		console.log("NO login");
@@ -331,6 +334,8 @@ function iniciarSistema(){
 		$("#banner-registro").show();
 		$(".link-registro").show();
 		$(".link-login").show();
+		//$(".link-tarjetas").hide();
+		$(".link-reclamo").hide();
 		$(".link-perfil").hide();
 		$(".link-logout").hide();
 		$('#selectTDC').hide();

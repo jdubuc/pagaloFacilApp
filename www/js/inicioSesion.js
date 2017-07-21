@@ -10,98 +10,81 @@ if (user === "" || pssw==="") {
 else{
   if (grecaptcha.getResponse() === "") {
     Materialize.toast("Verifique que ud no es un robot", 4000);
-    }else{
-   $.ajax({
-    beforeSend: function(){
-        $(".form").css("display", "none");
-        $("#preloader").css("display", "");
-        $("#preloader").addClass("loading");
-        //$("#preloader-text").css("display", "");
-        //$("#preloader-text").text("Cargando...");
-    },
-    complete: function(){
-        $(".form").css("display", "");
-        $("#preloader").removeClass("loading");
-    },
-    url: "https://pagalofacil.com/services/ServicioUsuario.php",
+  }else{
+    $.ajax({
+      /*beforeSend: function(){
+          $(".form").css("display", "none");
+          $("#preloader").css("display", "");
+          $("#preloader").addClass("loading");
+          //$("#preloader-text").css("display", "");
+          //$("#preloader-text").text("Cargando...");
+      },
+      complete: function(){
+          $(".form").css("display", "");
+          $("#preloader").removeClass("loading");
+      },*/
+      url: "https://www.pagalofacil.com/services/ServicioUsuario.php",
+      type: "POST",
+      data: {accion: "iniciarSesion", user: user, pssw: pssw, recaptcha:grecaptcha.getResponse()},
+      dataType: 'json',
 
-    type: "POST",
+      success: function(data){ 
 
-    data: {accion: "iniciarSesion", user: user, pssw: pssw,
-    recaptcha:grecaptcha.getResponse()},
-
-    dataType: 'json',
-
-    success: function(data){  
-
-       console.log(data);
+        console.log(data);
 
        //e.preventDefault();
 
-      if(data.success)
+        if(data.success)
+        {   console.log("entra success login");
 
-      {   console.log("entra success login");
+          if(data.flag){
 
-        if(data.flag){
+            console.log("entra true login");
 
-          console.log("entra true login");
+            sessionStorage.setItem("d_s", true);
+            sessionStorage.setItem("user", data.user);
+            sessionStorage.setItem("id_cliente", data.id_cliente);
 
-          sessionStorage.setItem("d_s", true);
+            //sessionStorage.d_s=data.cliente.telefono;
 
-          sessionStorage.setItem("user", data.user);
-
-          sessionStorage.setItem("id_cliente", data.id_cliente);
-
-          //sessionStorage.d_s=data.cliente.telefono;
-
-          var id_factura = getParameterByName('i');
-          if(id_factura == -1)
-          {
-            window.location="https://pagalofacil.com/index.html";
-          }
-          else
-          {
-            window.location="https://pagalofacil.com/orden-pago.html?i="+id_factura;
-          }
-
-
+            var id_factura = getParameterByName('i');
+            if(id_factura == -1)
+            {
+              window.location="https://www.pagalofacil.com/index.html";
+            }
+            else
+            {
+              window.location="https://www.pagalofacil.com/orden-pago.html?i="+id_factura;
+            }
 
           //sessionStorage.setItem("d_s", data.flag);
 
+          }
+
+          else
+          {
+
+            //Materialize.toast("Usuario o contraseña incorrecto", 4000);
+            Materialize.toast(data.message, 4000);
+            sessionStorage.setItem("d_s", false);
+            // e.preventDefault();
+          }
+        
         }
 
         else
-
         {
 
-          Materialize.toast("Usuario o contraseña incorrecto", 4000);
-
+          //Materialize.toast("Usuario o contraseña incorrecto", 4000);  
+          Materialize.toast(data.message, 4000);
           sessionStorage.setItem("d_s", false);
-
-          // e.preventDefault();
-
+         // e.preventDefault();
         }
 
-        
-
       }
 
-      else
-
-      {
-
-        Materialize.toast("Usuario o contraseña incorrecto", 4000);  
-
-        sessionStorage.setItem("d_s", false);
-
-       // e.preventDefault();
-
-      }
-
-    }
-
-  });
-}
+    });
+  }
 }
 
 
