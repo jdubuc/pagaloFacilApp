@@ -1,6 +1,3 @@
-var preloader = $('.preloader-wrapper');
-//$(".sidebar-collapse").sideNav();
-
 $(document).ready(function() {
 
   var valid=sessionStorage.getItem("d_s");
@@ -131,11 +128,6 @@ $('#btnSubmitUser').on('click', function(e) {
     datosInvalidos = true;
   });
 
-  if(preloader.hasClass('active')){
-      Materialize.toast("Procesando, por favor espere..", 5000);
-      return;
-  }
-
   if(datosIncompletos)
   {
     e.preventDefault();
@@ -155,45 +147,32 @@ $('#btnSubmitUser').on('click', function(e) {
       return;
     }
 
-    preloader.addClass('active');
-    $('#btnSubmitUser').addClass('disabled');
+    $.ajax({
+      url: "https://pagalofacil.com/services/ServicioUsuario.php",
+      type: "POST",
+      data: {
+        accion: "actualizarPerfil", datos_perfil:datos_perfil, ci:$("#ci_titular").val(), id_cliente:sessionStorage.getItem("id_cliente") /*telefono: telefono, direccion: direccion,
+        correo: correo, contrasena: password, id_cliente:sessionStorage.getItem("id_cliente")*/
+      },
+      dataType: 'json',
+      success: function(data){  
+         
+         console.log(data);
+         Materialize.toast(data.message, 4000); 
 
-    setTimeout(function () {
-      $.ajax({
-        url: "https://pagalofacil.com/services/ServicioUsuario.php",
-        type: "POST",
-        data: {
-          accion: "actualizarPerfil", datos_perfil:datos_perfil, ci:$("#ci_titular").val(), id_cliente:sessionStorage.getItem("id_cliente") /*telefono: telefono, direccion: direccion,
-          correo: correo, contrasena: password, id_cliente:sessionStorage.getItem("id_cliente")*/
-        },
-        dataType: 'json'
+        if(data.success)
+        {   
 
-      }).done(function (data) { 
-          console.log(data);
-          Materialize.toast(data.message, 4000); 
-          preloader.removeClass('active');
-          
-          if(data.success)
-          {   
-            console.log("perfil actualizado");
+          window.location="../login.html";
+        }
+        else
+        {
+          //Materialize.toast(data.message, 4000); 
+          e.preventDefault();
+        }
 
-            window.location.href="index.html";
-          }
-          else
-          {
-            //Materialize.toast(data.message, 4000); 
-            e.preventDefault();
-            $('#btnSubmitUser').removeClass('disabled');
-          }
+      }
 
-      }).fail(function () {
-          setTimeout(function () {
-              $('#btnSubmitUser').removeClass('disabled');
-              preloader.removeClass('active');
-              Materialize.toast('Network error..', 5000);
-          },500);
-      });
-    },500);
+    });
   }
 });
-

@@ -1,5 +1,3 @@
-var preloader = $('.preloader-wrapper');
-
 $(document).ready(function() {
 
   $('select').material_select();
@@ -145,11 +143,6 @@ $('#btnSubmit').on('click', function(e) {
 
   //e.preventDefault();
 
-  if(preloader.hasClass('active')){
-      Materialize.toast("Procesando, por favor espere..", 5000);
-      return;
-  }
-
   if(nombre == "" || apellido == "" || cedula == "" || telefono == "" || correo == "" || username == "" || password == "" || password_confirm == "")
   {
     datosIncompletos = true;
@@ -180,48 +173,31 @@ $('#btnSubmit').on('click', function(e) {
   }
   else
   { 
-    preloader.addClass('active');
-    $('#btnSubmit').addClass('disabled');
     
-    setTimeout(function () {
-      $.ajax({   
-        url: "https://www.pagalofacil.com/services/ServicioUsuario.php",
-        type: "POST",
-        data: {accion: "registrarUsuario", nombre: nombre, apellido: apellido, cedula: cedula, codigo_celular: codigo_celular, telefono: telefono, direccion: direccion,
-              correo: correo, username: username, password: password, titular_tarjeta: titular_tarjeta, ci_tarjeta: ci_tarjeta,
-              num_tarjeta: num_tarjeta, mes_venc: mes_venc, ano_venc: ano_venc, empresa_emisora: empresa_emisora, direccion_tarjeta: direccion_tarjeta,
-              titular_cuenta: titular_cuenta, ci_cuenta: ci_cuenta, num_cuenta: num_cuenta, tipo_cuenta: tipo_cuenta, id_banco: id_banco, is_juridico: is_juridico, prefijo_id: prefijo_id},
-        dataType: 'json'
-        
-      }).done(function (data) { 
-          console.log(data);
+    $.ajax({   
+      url: "https://pagalofacil.com/services/ServicioUsuario.php",
+      type: "POST",
+      data: {accion: "registrarUsuario", nombre: nombre, apellido: apellido, cedula: cedula, codigo_celular: codigo_celular, telefono: telefono, direccion: direccion,
+            correo: correo, username: username, password: password, titular_tarjeta: titular_tarjeta, ci_tarjeta: ci_tarjeta,
+            num_tarjeta: num_tarjeta, mes_venc: mes_venc, ano_venc: ano_venc, empresa_emisora: empresa_emisora, direccion_tarjeta: direccion_tarjeta,
+            titular_cuenta: titular_cuenta, ci_cuenta: ci_cuenta, num_cuenta: num_cuenta, tipo_cuenta: tipo_cuenta, id_banco: id_banco, is_juridico: is_juridico, prefijo_id: prefijo_id},
+      dataType: 'json',
+      success: function(data){  
+        console.log(data); 
+         e.preventDefault();
+        if(data.success)
+        {
+          Materialize.toast("Registro realizado con éxito", 4000);
+          window.location="../login.html";
 
+        }
+        else
+        {
+          Materialize.toast(data.message, 4000);   
           e.preventDefault();
-          if(data.success)
-          {
-            preloader.removeClass('active');
-            Materialize.toast("Registro realizado con éxito", 4000);
-            window.location.href="login.html";
-
-          }
-          else
-          {
-            Materialize.toast(data.message, 4000);   
-            e.preventDefault();
-            preloader.removeClass('active');
-            $('#btnSubmit').removeClass('disabled');
-          }
-              
-            
-
-      }).fail(function () {
-          setTimeout(function () {
-              $('#btnSubmit').removeClass('disabled');
-              preloader.removeClass('active');
-              Materialize.toast('Network error..', 5000);
-          },500);
-      });
-    },500);
+        }
+      }
+    });
   }
 
 }); 
