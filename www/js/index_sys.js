@@ -315,7 +315,9 @@ function iniciarSistema(){
 		cargaTarjetas();
 		//link-login
 		$("#banner-oper").show();
+		$("#banner-cobro").show();
 		$("#banner-registro").hide();
+		$("#banner-reclamo").hide();
 		$(".link-registro").hide();
 		$(".link-login").hide();
 		//$(".link-tarjetas").show();
@@ -331,7 +333,9 @@ function iniciarSistema(){
 	else{
 		console.log("NO login");
 		$("#banner-oper").hide();
+		$("#banner-cobro").hide();
 		$("#banner-registro").show();
+		$("#banner-reclamo").show();
 		$(".link-registro").show();
 		$(".link-login").show();
 		//$(".link-tarjetas").hide();

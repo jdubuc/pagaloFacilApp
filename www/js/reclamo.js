@@ -1,3 +1,5 @@
+var preloader = $('.preloader-wrapper');
+
 $(document).ready(function() {
 
   var valid=sessionStorage.getItem("d_s");
@@ -16,7 +18,7 @@ $(document).ready(function() {
 function cargarDatosUsuario(){
   $.ajax({
 
-    url: "services/ServicioUsuario.php",
+    url: "https://www.pagalofacil.com/services/ServicioUsuario.php",
     type: "POST",
     data: {accion: "buscarDatosUsuario", id_cliente:sessionStorage.getItem("id_cliente")},
     dataType: 'json',
@@ -84,6 +86,11 @@ $('#btnSubmit').on('click', function(e) {
     datosIncompletos = true;
   });
 
+  if(preloader.hasClass('active')){
+      Materialize.toast("Procesando, por favor espere..", 5000);
+      return;
+  }
+
   if(datosIncompletos)
   {
     e.preventDefault();
@@ -92,34 +99,62 @@ $('#btnSubmit').on('click', function(e) {
   }
   else
   {
-    
-    $.ajax({
-      url: "services/ServicioUsuario.php",
-      type: "POST",
-      data: {
-        accion: "enviarReclamo", datos_reclamo:datos_reclamo/*telefono: telefono, direccion: direccion,
-        correo: correo, contrasena: password, id_cliente:sessionStorage.getItem("id_cliente")*/
-      },
-      dataType: 'json',
-      success: function(data){  
-         
-         console.log(data);
-         Materialize.toast(data.message, 4000); 
+    preloader.addClass('active');
+    $('#btnSubmit').addClass('disabled');
 
-        if(data.success)
-        {   
-          console.log("reclamo enviado");
+    setTimeout(function () {
+      $.ajax({
+        url: "https://www.pagalofacil.com/services/ServicioUsuario.php",
+        type: "POST",
+        data: {
+          accion: "enviarReclamo", datos_reclamo:datos_reclamo/*telefono: telefono, direccion: direccion,
+          correo: correo, contrasena: password, id_cliente:sessionStorage.getItem("id_cliente")*/
+        },
+        dataType: 'json'/*,
+        success: function(data){  
+           
+           console.log(data);
+           Materialize.toast(data.message, 4000); 
 
-          window.location="index.html";
-        }
-        else
-        {
-          //Materialize.toast(data.message, 4000); 
-          e.preventDefault();
-        }
+          if(data.success)
+          {   
+            console.log("reclamo enviado");
 
-      }
+            window.location="index.html";
+          }
+          else
+          {
+            //Materialize.toast(data.message, 4000); 
+            e.preventDefault();
+          }
 
-    });
+        }*/
+
+      }).done(function (data) { 
+          console.log(data);
+          Materialize.toast(data.message, 4000); 
+
+          if(data.success)
+          {   
+            console.log("reclamo enviado");
+            preloader.removeClass('active');
+            window.location.href="index.html";
+          }
+          else
+          {
+            //Materialize.toast(data.message, 4000); 
+            e.preventDefault();
+            preloader.removeClass('active');
+            $('#btnSubmit').removeClass('disabled');
+          }
+          
+      }).fail(function () {
+          setTimeout(function () {
+              $('#btnSubmit').removeClass('disabled');
+              preloader.removeClass('active');
+              Materialize.toast('Network error..', 5000);
+          },500);
+      });
+    },500);
   }
 }); 

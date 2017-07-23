@@ -91,6 +91,10 @@
                   </li>
                   <li class="bold link-login"><a href="login.html" class="waves-effect waves-cyan"><i class="mdi-action-account-circle"></i> Inicio Sesion</a>
                   </li>
+                  <li class="bold link-cobro"><a href="form-cobro.html" class="waves-effect waves-cyan"><i class="material-icons">attach_money</i> Cobrar</a>
+                  </li>
+                  <li class="bold link-operaciones"><a href="list.html" class="waves-effect waves-cyan"><i class="material-icons">phonelink_setup</i> Operaciones</a>
+                  </li>
                   <li class="bold link-reclamo"><a href="reclamo.html" class="waves-effect waves-cyan"><i class="mdi-action-assignment"></i> Reclamos</a>
                   </li>
                   </li>
@@ -98,6 +102,8 @@
                   </li>
                   <li class="bold link-logout"><a href="#" class="waves-effect waves-cyan"><i class="mdi-action-settings-power"></i> Cerrar Sesion</a>
                   </li>
+
+
                   <!-- <li class="no-padding">
                        <ul class="collapsible collapsible-accordion">
                            <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-action-invert-colors"></i> Operaciones</a>
@@ -148,55 +154,7 @@
       <!-- END LEFT SIDEBAR NAV-->
 
 <div class="content">
-     <div class="row">
-                  <div id="media-slider">
-            
-                    <div class="row">
-                      
-                      <div class="col s12 m12 l12 slide-box-edit">
-
-                        <div class="slider">
-                          <ul class="slides">
-                           <li class="grey">
-                               <img src="images/Banner-1.png" alt="img-1" style="opacity: 0.5;">
-                                random image &ndash;&gt;
-                              <div class="caption center-align">
-                                <h3 style="text-shadow: 2px 2px 8px #000;">Págalo fácil!</h3>
-                                <h5 style="text-shadow: 2px 2px 8px #000;" class="light grey-text text-lighten-3">Tu pago efectivo el mismo día.</h5>
-                              </div>
-                            </li>
-                            <li class="grey">
-                            <img src="images/Banner-2.png" alt="img-2" style="opacity: 0.5;">
-                             
-                              <div class="caption center-align">
-                                <h3 style="text-shadow: 2px 2px 8px #000;">Tu punto de venta virtual!</h3>
-                                <h5 style="text-shadow: 2px 2px 8px #000;" class="light grey-text text-lighten-3">Paga a cualquier persona natural o jurídica</h5>
-                              </div>
-                            </li>
-                            <li class="grey">
-                                <img src="images/Banner-4.png" alt="img-2" style="opacity: 0.5;">
-                            
-                              <div class="caption left-align">
-                                <h3 style="text-shadow: 2px 2px 8px #000;">Adiós al efectivo</h3>
-                                <h5 style="text-shadow: 2px 2px 8px #000;" class="light grey-text text-lighten-3">Convierte tu teléfono o pc en un punto de venta</h5>
-                              </div>
-                            </li>
-                            <li class="grey">
-                                <img src="images/Banner-3.png" alt="img-2" style="opacity: 0.5;">
-                              &lt;!&ndash; random image &ndash;&gt;
-                              <div class="caption left-align">
-                                <h3 style="text-shadow: 2px 2px 8px #000;">Disponible para pc y android</h3>
-                                <h5 style="text-shadow: 2px 2px 8px #000;" class="light grey-text text-lighten-3">Rápido seguro y fácil.</h5>
-                              </div>
-                            </li>
-                           
-                          </ul>
-                        </div>
-
-                      </div>
-                    </div>
-                 </div>
-     </div>
+     
      <div class="row">
         <section id="content">
 
@@ -216,7 +174,7 @@
                            </div>
                        </a>
               </div>-->
-              <div class="col s12 m4 l4">
+              <div class="col s12 m4 l4" id="banner-cobro" style="display:none;">
                        <!--<a href="form-cobro.html">-->
                        <a href="#" id="cobrar">
                            <div class="card-panel grey lighten-5 z-depth-1" style="cursor:pointer;" >
@@ -227,6 +185,22 @@
                                    <div class="col s8 m8 l8">
                                        <h4>Cobrar</h4>
                                        <span class="black-text">Es fácil y Rápido</span>
+                                   </div>
+                               </div>
+                           </div>
+                       </a>
+              </div>
+
+              <div class="col s12 m4 l4" id="banner-registro">
+                       <a href="registro.html">
+                           <div class="card-panel grey lighten-5 z-depth-1" style="cursor:pointer;" >
+                               <div class="row valign-wrapper">
+                                   <div class="col s4 m4 l4">
+                                       <img class="circle responsive-img valign" alt="" src="images/add-user.png">
+                                   </div>
+                                   <div class="col s8 m8 l8">
+                                       <h4>Registro</h4>
+                                       <span class="black-text">Disfruta nuestros servicios</span>
                                    </div>
                                </div>
                            </div>
@@ -250,7 +224,7 @@
 
 
               </div>
-              <div id="banner-registro" class="col s12 m4 l4" style="display:none;">
+              <div id="banner-reclamo" class="col s12 m4 l4" style="display:none;">
                          <a href="reclamo.html">
                           <div class="box card-panel grey lighten-5 z-depth-1 " style="cursor:pointer;">
                                       <div class="row valign-wrapper">
@@ -307,20 +281,6 @@
 
   </div>
   <!-- END MAIN -->
-
-
-    <footer class="page-footer" style="height:55px !important;">
-    <div class="footer-copyright">
-      <div class="container">
-        <span>Copyright © 2016 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">PagaloFacil</a> todos los derechos reservados.</span>
-        <span class="right"> Diseño y desarrollo  <a class="grey-text text-lighten-4" href="http://creativetrue.com/">CreativeTrue</a></span>
-        </div>
-    </div>
-  </footer>
-
-  <!-- //////////////////////////////////////////////////////////////////////////// -->
-
- 
 
 
     <!-- ================================================

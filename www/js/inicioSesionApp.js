@@ -16,17 +16,15 @@ $('#btnAceptar').on('click', function(e) {
       Materialize.toast("Ingrese un Usuario y contraseña", 4000);
   }
   else{
-    if (grecaptcha.getResponse() === "") {
-      Materialize.toast("Verifique que ud no es un robot", 4000);
-  }else{
+    
     preloader.addClass('active');
     $('#btnAceptar').addClass('disabled');
 
     setTimeout(function () {
       $.ajax({
-        url: "https://www.pagalofacil.com/services/ServicioUsuario.php",
+        url: "https://www.pagalofacil.com/services/ServicioUsuarioApp.php",
         type: "POST",
-        data: {accion: "iniciarSesion", user: user, pssw: pssw, recaptcha:grecaptcha.getResponse()},
+        data: {accion: "iniciarSesion", user: user, pssw: pssw},
         dataType: 'json'
 
       }).done(function (data) { 
@@ -90,7 +88,7 @@ $('#btnAceptar').on('click', function(e) {
                 });
 
     },500);
-  }
+  
 }
 
 
