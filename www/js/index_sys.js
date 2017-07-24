@@ -286,7 +286,7 @@ $(document).ready(function() {
 				if(data.success)
 				{
 					if(data.flag){
-						window.location="https://pagalofacil.com/index.html";
+						window.location="index.html";
 						sessionStorage.clear();
 						Materialize.toast("Sesion cerrada", 4000);
 					}
@@ -310,36 +310,27 @@ function iniciarSistema(){
 	iniciarventana();
 	var valid=sessionStorage.getItem("d_s");
 
-	if(valid  == "true"){
+	if(valid){
 		console.log("sesion iniciada");
 		cargaTarjetas();
 		//link-login
 		$("#banner-oper").show();
-		$("#banner-cobro").show();
 		$("#banner-registro").hide();
-		$("#banner-reclamo").hide();
 		$(".link-registro").hide();
 		$(".link-login").hide();
-		//$(".link-tarjetas").show();
-		$(".link-reclamo").show();
 		$(".link-perfil").show();
 		$(".link-logout").show();
 		$('#selectTDC').show();
 		$('#acordeon').css('display', '');
 		$('#seccion-img-user').css('display', 'none');
 		$('#tipo').css('display', '');
-
 	}
 	else{
 		console.log("NO login");
 		$("#banner-oper").hide();
-		$("#banner-cobro").hide();
 		$("#banner-registro").show();
-		$("#banner-reclamo").show();
 		$(".link-registro").show();
 		$(".link-login").show();
-		//$(".link-tarjetas").hide();
-		$(".link-reclamo").hide();
 		$(".link-perfil").hide();
 		$(".link-logout").hide();
 		$('#selectTDC').hide();
