@@ -115,10 +115,6 @@ body {
 
 }
 
-.materialMargin {
-   padding-top: 300px;
-}
-
 .modal {
   z-index: 10000 !important;
 }

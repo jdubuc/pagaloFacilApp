@@ -188,7 +188,7 @@ $('#btnSubmit').on('click', function(e) {
         if(data.success)
         {
           Materialize.toast("Registro realizado con éxito", 4000);
-          window.location="../login.html";
+          window.location="https://pagalofacil.com/login.html";
 
         }
         else

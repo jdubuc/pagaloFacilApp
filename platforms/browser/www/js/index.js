@@ -304,7 +304,7 @@ $(document).ready(function() {
 
 					if(data.flag){
 
-						window.location="https://pagalofacil.com/index.html";
+						window.location="index.html";
 
 						sessionStorage.clear();
 

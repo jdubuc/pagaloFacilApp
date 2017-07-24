@@ -286,7 +286,7 @@ $(document).ready(function() {
 				if(data.success)
 				{
 					if(data.flag){
-						window.location="https://pagalofacil.com/index.html";
+						window.location="index.html";
 						sessionStorage.clear();
 						Materialize.toast("Sesion cerrada", 4000);
 					}

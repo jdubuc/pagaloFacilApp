@@ -110,7 +110,7 @@ $('#btnSubmit').on('click', function(e) {
         {   
           console.log("reclamo enviado");
 
-          window.location="../index.html";
+          window.location="index.html";
         }
         else
         {
